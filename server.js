@@ -32,18 +32,14 @@ app.get("*", (req, res) => {
 
 
 app.delete("/api/notes/:id", (req, res) => {
-  const id = req.params.id.toString();;
-  const updatedDb = db.filter(note =>{
-    if(note.id === id){
-      return false
-    }else {
-      return true
-    }
-  })
-  console.log(id)
-  console.log(updatedDb)
-  db = updatedDb
-  res.json(db);
+  const id = req.params.id;
+  const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
+  console.log(notes,id);
+  const updatedDb = notes.filter(note => note.id !== id)
+  // console.log(id)
+  fs.writeFileSync('./db/db.json',JSON.stringify(updatedDb))
+  // db = updatedDb
+  res.json(updatedDb);
 
   })
   
