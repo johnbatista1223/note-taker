@@ -4,7 +4,7 @@
 This project is made to take notes , you can easily write out a title you want and the actual note on the notepad. Once you put title and the actual note then you a save button should come up in the top right hand corner, you hit the save button and the notes are stored to the right hand side. After you have a chance to delete the notes buy hitting the delete button on the left side.
 
 ## Installation
- you can clone code from repository in github link and bring it down to your local drive. From thier you can use visual studio code as your ide or any other is fine.you also need npm install and npm uuid which i used to create a specific id to delete the actual notes. once in the terminal you open terminal and run npm run  watch that starts the local server port.then you can open uo browser and go to the port that it is in and note taker should be in there.
+ you can clone code from repository in github link and bring it down to your local drive. From thier you can use visual studio code as your ide or any other is fine.you also need npm install, npm uuid , and nodemon which i used to create a specific id to delete the actual notes. once in the terminal you open terminal and run npm run  watch that starts the local server port.then you can open uo browser and go to the port that it is in and note taker should be in there.
 ## Usage
  clone the repo from https://github.com/johnbatista1223/note-taker you can use visual studio code as ide then open in google chrome or any browser. the use of this app is to create notes and save notes in the note pad .
  <img src="front.png" alt="note taker app" width= 300>
