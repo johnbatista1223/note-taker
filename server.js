@@ -1,7 +1,8 @@
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
-let db = require("./db/db.json");
+const {v4 : uuidv4} = require('uuid');
+ 
 
 const app = express();
 const PORT = 3000;
@@ -17,32 +18,32 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 app.get("/api/notes", (req, res) => {
+  let db = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   res.json(db);
 });
 app.post("/api/notes", (req, res) => {
-  const note = req.body;
-db.push(note);
-res.json(true);
+  console.log('post')
+  let note = req.body;
+  let list = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let newId = uuidv4()
+  note.id = newId;
+list.push(note);
+fs.writeFileSync("./db/db.json", JSON.stringify(list));
+res.json(list);
 });
-
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-
 
 
 app.delete("/api/notes/:id", (req, res) => {
-  let id = req.params;
+  let id = req.params.id;
   let notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf-8'));
   console.log(notes, id);
   let updatedDb = notes.filter(note => note.id !== id)
-  // console.log(id)
   fs.writeFileSync('./db/db.json', JSON.stringify(updatedDb))
-  db = updatedDb
   res.json(updatedDb);
-
 })
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
 
 // Starts the server to begin listening
